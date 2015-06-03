@@ -32,7 +32,7 @@ def main():
                 print('  {0:.2f} {1}'.format(v, u))
         # Special case for the unix time epoch
         if unit in times:
-            unixtime = int(time.time()) + baseValue
+            unixtime = int(time.time()) + int(baseValue)
             print('Unix time epoch for {} {} from now: {}'.format(value, unit, unixtime))
 
     except:
