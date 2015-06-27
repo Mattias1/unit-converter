@@ -33,7 +33,7 @@ def main():
         # Special case for the unix time epoch
         if unit in times:
             unixtime = int(time.time()) + int(baseValue)
-            print('Unix time epoch for {} {} from now: {}'.format(value, unit, unixtime))
+            print('Unix time {} {} from now: {}'.format(value, unit, unixtime))
 
     except:
         print('Conversion fail')
@@ -46,7 +46,7 @@ def toBase(value, unit):
         'minutes': value * 60,
         'hours': value * 3600,
         'days': value * 86400,
-        'weeks': value * 345600,
+        'weeks': value * 604800,
         'years': value * 86400 * 365.242,
 
         'm/s': value,
@@ -66,7 +66,7 @@ def fromBase(value, unit):
         'minutes': value / 60,
         'hours': value / 3600,
         'days': value / 86400,
-        'weeks': value / 345600,
+        'weeks': value / 604800,
         'years': value / (86400 * 365.242),
 
         'm/s': value,
@@ -102,6 +102,8 @@ def substituteunits(s):
         'hour': 'hours',
         'd': 'days',
         'day': 'days',
+        'w': 'weeks',
+        'week': 'weeks',
         'y': 'years',
         'year': 'years'
     }
