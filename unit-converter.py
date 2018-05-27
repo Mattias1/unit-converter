@@ -13,7 +13,8 @@ import time
 times = 'seconds, minutes, hours, days, weeks, years'
 velocities = 'm/s, km/h, mph'
 temperatures = 'C, K, F'
-units = [times, velocities, temperatures]
+distances = 'milimeters, centimeters, kilometers, inches, miles, meters'
+units = [times, velocities, temperatures, distances]
 
 def main():
     # Get the input (from command line if present otherwise from input)
@@ -55,7 +56,14 @@ def toBase(value, unit):
 
         'C': value,
         'K': value - 273.15,
-        'F': (value - 32) / 1.8
+        'F': (value - 32) / 1.8,
+
+        'milimeters': value,
+        'centimeters': value * 10,
+        'meters': value * 1000,
+        'kilometers': value * 1000000,
+        'inches': value * 25.4,
+        'miles': value * 1609344
     }[unit]
 
 
@@ -75,7 +83,14 @@ def fromBase(value, unit):
 
         'C': value,
         'K': value + 273.15,
-        'F': value * 1.8 + 32
+        'F': value * 1.8 + 32,
+
+        'milimeters': value,
+        'centimeters': value / 10,
+        'meters': value / 1000,
+        'kilometers': value / 1000000,
+        'inches': value / 25.4,
+        'miles': value / 1609344
     }
     for unitstring in units:
         unitlist = unitstring.split(', ')
@@ -95,7 +110,6 @@ def substituteunits(s):
         's': 'seconds',
         'sec': 'seconds',
         'secs': 'seconds',
-        'm': 'minutes',
         'min': 'minutes',
         'mins': 'minutes',
         'h': 'hours',
@@ -105,7 +119,14 @@ def substituteunits(s):
         'w': 'weeks',
         'week': 'weeks',
         'y': 'years',
-        'year': 'years'
+        'year': 'years',
+
+        'mm': 'milimeters',
+        'cm': 'centimeters',
+        'm': 'meters',
+        'km': 'kilometers',
+        "''": 'inches',
+        'mi': 'miles'
     }
     for key, value in subs.items():
         s = re.sub('(.*[0-9]){}$'.format(key), '\\1{}'.format(value), s)
