@@ -13,7 +13,7 @@ import time
 times = 'seconds, minutes, hours, days, weeks, years'
 velocities = 'm/s, km/h, mph'
 temperatures = 'C, K, F'
-distances = 'milimeters, centimeters, kilometers, inches, miles, meters'
+distances = 'milimeters, centimeters, kilometers, inches, feet, miles, meters'
 units = [times, velocities, temperatures, distances]
 
 def main():
@@ -54,6 +54,9 @@ def toBase(value, unit):
         'km/h': value / 3.6,
         'mph': value * 0.44704,
 
+        'm/s2': value,
+        'km/h2': value,
+
         'C': value,
         'K': value - 273.15,
         'F': (value - 32) / 1.8,
@@ -63,6 +66,7 @@ def toBase(value, unit):
         'meters': value * 1000,
         'kilometers': value * 1000000,
         'inches': value * 25.4,
+        'feet': value * 304.8,
         'miles': value * 1609344
     }[unit]
 
@@ -90,6 +94,7 @@ def fromBase(value, unit):
         'meters': value / 1000,
         'kilometers': value / 1000000,
         'inches': value / 25.4,
+        'feet': value / 304.8,
         'miles': value / 1609344
     }
     for unitstring in units:
@@ -126,6 +131,8 @@ def substituteunits(s):
         'm': 'meters',
         'km': 'kilometers',
         "''": 'inches',
+        "'": 'feet',
+        "ft": 'feet',
         'mi': 'miles'
     }
     for key, value in subs.items():
